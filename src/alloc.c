@@ -56,29 +56,28 @@ struct Chunk* find_free_block(size_t size, struct Chunk** last_chunk){
     return current_chunk;
 }
 
+struct Chunk* new_chunk(size_t size){
+    void* new_mem = get_more_memory(sizeof(struct Chunk) + size);
+    struct Chunk* chunk = (struct Chunk*)new_mem;
+    chunk->size = size;
+    chunk->next = NULL;
+    chunk->is_free = false;
+    return chunk;
+}
+
 void* custom_malloc(size_t size){
     size = align_allocation(size);
     struct Chunk* chunk = NULL;
     if (start_chunk == NULL){
-        void* new_mem = get_more_memory(sizeof(struct Chunk) + size);
-        chunk = (struct Chunk*)new_mem;
-        chunk->size = size;
-        chunk->next = NULL;
-        chunk->is_free = false;
+        chunk = new_chunk(size);
         start_chunk = chunk;
     } else {
-
-
         struct Chunk* last_chunk = NULL;
         struct Chunk* current_chunk = find_free_block(size, &last_chunk);
 
         if (!current_chunk){
             // couldn't find free chunk
-            void* new_mem = get_more_memory(sizeof(struct Chunk) + size);
-            chunk = (struct Chunk*)new_mem;
-            chunk->size = size;
-            chunk->next = NULL;
-            chunk->is_free = false;
+            chunk = new_chunk(size);
             last_chunk->next = chunk;
         } else {
             current_chunk->is_free = false;

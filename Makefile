@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS=-Wall -c -g -fPIC
-CFLAGS += -fsanitize=undefined,address
-LDFLAGS = -fsanitize=undefined,address
+# CFLAGS += -fsanitize=undefined,address
+# LDFLAGS = -fsanitize=undefined,address
 
 ifeq ($(RELEASE),TRUE)
 	LDFLAGS += -s
