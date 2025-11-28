@@ -3,3 +3,5 @@
 #define ALLOC_ALIGNEMENT 16
 
 #define REPLACE_LIBC_FUNCTIONS 0
+
+#define LOGGING 1

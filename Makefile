@@ -1,13 +1,13 @@
 CC = gcc
-CFLAGS=-Wall -c -g -fPIC
+CFLAGS=-Wall -Wextra -c -g -fPIC
 # CFLAGS += -fsanitize=undefined,address
 # LDFLAGS = -fsanitize=undefined,address
 
 ifeq ($(RELEASE),TRUE)
-	LDFLAGS += -s
-	CFLAGS += -O3
-else
+#	LDFLAGS += -s
 	CFLAGS += -O2
+else
+	CFLAGS += -O0
 endif
 
 SRCDIR = src
