@@ -1,0 +1,1 @@
+void safe_log(const char* message);
